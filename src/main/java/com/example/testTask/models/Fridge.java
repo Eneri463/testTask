@@ -18,34 +18,16 @@ public class Fridge {
     private Long id;
 
     @NotNull
-    @Column(name = "name")
-    private String name;
-
-    @NotNull
-    @Column(name = "serial_number")
-    private String serialNumber;
-
-    @NotNull
-    @Column(name = "colour")
-    private String colour;
-
-    @NotNull
-    @Column(name = "size")
-    private String size;
-
-    @NotNull
-    @Column(name = "price")
-    private double price;
-
-    @NotNull
     @Column(name = "number_of_doors")
     private int numberOfDoors;
 
     @NotNull
-    @Column(name = "compressor_type")
-    private String compressorType;
+    @ManyToOne
+    @JoinColumn(name = "compressor_type_id")
+    private FridgeCompressorType compressorType;
 
     @NotNull
-    @Column(name = "available")
-    private boolean available;
+    @OneToOne
+    @JoinColumn(name = "model_id")
+    private Model model;
 }

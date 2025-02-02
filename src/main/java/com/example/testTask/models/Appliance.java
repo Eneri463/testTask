@@ -1,5 +1,6 @@
 package com.example.testTask.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -23,28 +24,30 @@ public class Appliance {
     private Long id;
 
     @NotNull
-    @ManyToOne
-    @JoinColumn(name = "customer_id")
-    private AppliancesType name; // наименование товара
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "appliance_id")
+    private ApplianceType name; // наименование товара
 
     @NotNull
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "country_id")
     private ProducerCountry producerCountry; // компания-производитель
 
     @NotNull
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "company_id")
     private ProducerCompany producerCompany; // фирма-производитель
 
     @NotNull
+    @Column(name = "online_order")
     private boolean onlineOrder; // возможность заказа онлайн
 
     @NotNull
+    @Column(name = "installment_plan")
     private boolean installmentPlan; // возможность оплаты в рассрочку
 
-    @OneToMany(mappedBy = "appliance", cascade = CascadeType.ALL, orphanRemoval = true)
-    Set<AllModels> modelList = new HashSet<>();
+    @OneToMany(mappedBy = "appliance", cascade = CascadeType.ALL)
+    Set<Model> modelsList = new HashSet<>();
 
 
 }

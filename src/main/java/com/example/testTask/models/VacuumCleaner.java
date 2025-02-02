@@ -19,35 +19,16 @@ public class VacuumCleaner {
     private Long id;
 
     @NotNull
-    @Column(name = "name")
-    private String name;
-
-    @NotNull
-    @Column(name = "serial_number")
-    private String serialNumber;
-
-    @NotNull
-    @Column(name = "colour")
-    private String colour;
-
-    @NotNull
-    @Column(name = "size")
-    private String size;
-
-    @NotNull
-    @Column(name = "price")
-    private double price;
-
-    @NotNull
     @Column(name = "volume")
     private double volume;
 
     @NotNull
-    @Column(name = "technology")
+    @Column(name = "number_of_modes")
     private int numberOfModes;
 
     @NotNull
-    @Column(name = "available")
-    private boolean available;
+    @OneToOne
+    @JoinColumn(name = "model_id")
+    private Model model;
 
 }

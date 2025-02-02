@@ -19,34 +19,17 @@ public class Computer {
     private Long id;
 
     @NotNull
-    @Column(name = "name")
-    private String name;
+    @ManyToOne
+    @JoinColumn(name = "category_id")
+    private ComputerCategory category;
 
     @NotNull
-    @Column(name = "serial_number")
-    private String serialNumber;
+    @ManyToOne
+    @JoinColumn(name = "processor_type_id")
+    private ComputerProcessorType processorType;
 
     @NotNull
-    @Column(name = "colour")
-    private String colour;
-
-    @NotNull
-    @Column(name = "size")
-    private String size;
-
-    @NotNull
-    @Column(name = "price")
-    private double price;
-
-    @NotNull
-    @Column(name = "category")
-    private String category;
-
-    @NotNull
-    @Column(name = "processor_type")
-    private String processorType;
-
-    @NotNull
-    @Column(name = "available")
-    private boolean available;
+    @OneToOne
+    @JoinColumn(name = "model_id")
+    private Model model;
 }

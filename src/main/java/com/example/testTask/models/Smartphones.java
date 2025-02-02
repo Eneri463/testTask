@@ -19,26 +19,6 @@ public class Smartphones {
     private Long id;
 
     @NotNull
-    @Column(name = "name")
-    private String name;
-
-    @NotNull
-    @Column(name = "serial_number")
-    private String serialNumber;
-
-    @NotNull
-    @Column(name = "colour")
-    private String colour;
-
-    @NotNull
-    @Column(name = "size")
-    private String size;
-
-    @NotNull
-    @Column(name = "price")
-    private double price;
-
-    @NotNull
     @Column(name = "memory_size")
     private int memorySize;
 
@@ -47,7 +27,8 @@ public class Smartphones {
     private int numberOfCameras;
 
     @NotNull
-    @Column(name = "available")
-    private boolean available;
+    @OneToOne
+    @JoinColumn(name = "model_id")
+    private Model model;
 
 }

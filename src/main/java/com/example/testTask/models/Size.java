@@ -1,5 +1,6 @@
 package com.example.testTask.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -7,28 +8,24 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "television")
+@Table(name = "size")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Television {
+public class Size {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
 
     @NotNull
-    @ManyToOne
-    @JoinColumn(name = "category_id")
-    private TelevisionCategory category;
+    @Column(name = "size")
+    private String size; // представление размера в строковом формате
 
     @NotNull
-    @ManyToOne
-    @JoinColumn(name = "technology_id")
-    private TelevisionTechnology technology;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "appliance_id")
+    @JsonIgnore
+    private ApplianceType appliance; // вид техники
 
-    @NotNull
-    @OneToOne
-    @JoinColumn(name = "model_id")
-    private Model model;
 }

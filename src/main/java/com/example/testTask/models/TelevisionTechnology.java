@@ -7,17 +7,15 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "appliances_type")
+@Table(name = "television_technology")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class AppliancesType {
-
+public class TelevisionTechnology {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
-
     @NotNull
     @Column(name = "name")
     private String name;

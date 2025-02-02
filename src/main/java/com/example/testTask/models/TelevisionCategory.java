@@ -7,28 +7,16 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "television")
+@Table(name = "television_category")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Television {
+public class TelevisionCategory {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
-
     @NotNull
-    @ManyToOne
-    @JoinColumn(name = "category_id")
-    private TelevisionCategory category;
-
-    @NotNull
-    @ManyToOne
-    @JoinColumn(name = "technology_id")
-    private TelevisionTechnology technology;
-
-    @NotNull
-    @OneToOne
-    @JoinColumn(name = "model_id")
-    private Model model;
+    @Column(name = "name")
+    private String name;
 }
