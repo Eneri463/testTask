@@ -1,5 +1,6 @@
 package com.example.testTask.specifications;
 
+import com.example.testTask.dto.PostParamsDTO;
 import com.example.testTask.models.*;
 import jakarta.persistence.criteria.Fetch;
 import jakarta.persistence.criteria.Predicate;
@@ -13,9 +14,7 @@ import java.util.List;
 @Component
 public class GeneralSpecification {
 
-    public static Specification<Model> mainFilters(String countryName,String companyName,Boolean online,
-                                              Boolean installment,Double priceMin,Double priceMax,
-                                              String colourName, String orderBy) {
+    public static Specification<Model> mainFilters(PostParamsDTO postParamsDTO) {
         return (root, query, cb) -> {
 
             List<Predicate> list = new ArrayList<Predicate>();
@@ -28,17 +27,17 @@ public class GeneralSpecification {
             appliance.fetch("producerCountry");
             appliance.fetch("producerCompany");
 
-            if (countryName != null ) list.add(cb.equal(cb.upper(root.get("appliance").get("producerCountry").get("name")), countryName.toUpperCase()));
-            if (companyName != null ) list.add(cb.equal(cb.upper(root.get("appliance").get("producerCompany").get("name")), companyName.toUpperCase()));
-            if (online != null ) list.add(cb.equal(root.get("appliance").get("onlineOrder"), online));
-            if (installment != null ) list.add(cb.equal(root.get("appliance").get("installmentPlan"), installment));
-            if (priceMin != null) list.add(cb.greaterThanOrEqualTo(root.get("price"), priceMin));
-            if (priceMax != null) list.add(cb.lessThanOrEqualTo(root.get("price"), priceMax));
-            if (colourName != null ) list.add(cb.equal(cb.upper(root.get("colour")), colourName.toUpperCase()));
+            if (postParamsDTO.getCountry() != null ) list.add(cb.equal(cb.upper(root.get("appliance").get("producerCountry").get("name")), postParamsDTO.getCountry()));
+            if (postParamsDTO.getCompany() != null ) list.add(cb.equal(cb.upper(root.get("appliance").get("producerCompany").get("name")), postParamsDTO.getCompany().toUpperCase()));
+            if (postParamsDTO.getOnline() != null ) list.add(cb.equal(root.get("appliance").get("onlineOrder"), postParamsDTO.getOnline()));
+            if (postParamsDTO.getInstallment() != null ) list.add(cb.equal(root.get("appliance").get("installmentPlan"), postParamsDTO.getInstallment()));
+            if (postParamsDTO.getMin_price() != null) list.add(cb.greaterThanOrEqualTo(root.get("price"), postParamsDTO.getMin_price()));
+            if (postParamsDTO.getMax_price() != null) list.add(cb.lessThanOrEqualTo(root.get("price"), postParamsDTO.getMax_price()));
+            if (postParamsDTO.getColour() != null ) list.add(cb.equal(cb.upper(root.get("colour")), postParamsDTO.getColour().toUpperCase()));
 
-            if (orderBy != null) {
+            if (postParamsDTO.getSort() != null) {
 
-                String[] partOfOrder = orderBy.split(",");
+                String[] partOfOrder = postParamsDTO.getSort().split(",");
 
                 if (partOfOrder[0].toUpperCase() == "PRICE")
                     if (partOfOrder.length > 1 && partOfOrder[1].toUpperCase() == "DESC")

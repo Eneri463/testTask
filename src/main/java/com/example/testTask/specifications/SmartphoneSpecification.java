@@ -1,5 +1,6 @@
 package com.example.testTask.specifications;
 
+import com.example.testTask.dto.SmartphonesParams;
 import com.example.testTask.models.Smartphone;
 import jakarta.persistence.criteria.Predicate;
 import org.springframework.data.jpa.domain.Specification;
@@ -10,11 +11,9 @@ import java.util.List;
 
 @Component
 public class SmartphoneSpecification extends ParticularModelSpecification<Smartphone>{
-    public Specification<Smartphone> build(String country, String company, Boolean online,
-                                       Boolean installment, Double priceMin, Double priceMax,
-                                       String colour, String orderBy, Integer numberOfCameras, Integer memorySize)
+    public Specification<Smartphone> build(SmartphonesParams params)
     {
-        return this.mainFilters(country, company, online, installment, priceMin, priceMax, colour, orderBy).and(addFilters(numberOfCameras, memorySize));
+        return this.mainFilters(params).and(addFilters(params.getNumber_of_cameras(), params.getMemory_size()));
     }
 
     public Specification<Smartphone> addFilters(Integer numberOfCameras, Integer memorySize)

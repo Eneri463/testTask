@@ -1,5 +1,6 @@
 package com.example.testTask.specifications;
 
+import com.example.testTask.dto.TelevisionParams;
 import com.example.testTask.models.Television;
 import jakarta.persistence.criteria.Predicate;
 import org.springframework.data.jpa.domain.Specification;
@@ -11,11 +12,9 @@ import java.util.List;
 @Component
 public class TelevisionSpecification extends ParticularModelSpecification<Television>{
 
-    public Specification<Television> build(String country, String company, Boolean online,
-                                       Boolean installment, Double priceMin, Double priceMax,
-                                       String colour, String orderBy, String category, String technology)
+    public Specification<Television> build(TelevisionParams params)
     {
-        return this.mainFilters(country, company, online, installment, priceMin, priceMax, colour, orderBy).and(addFilters(category, technology));
+        return this.mainFilters(params).and(addFilters(params.getCategory(), params.getTechnology()));
     }
 
     public Specification<Television> addFilters(String category, String technology)

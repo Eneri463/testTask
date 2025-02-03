@@ -1,5 +1,6 @@
 package com.example.testTask.specifications;
 
+import com.example.testTask.dto.ComputerParams;
 import com.example.testTask.models.*;
 import jakarta.persistence.criteria.Predicate;
 import org.springframework.data.jpa.domain.Specification;
@@ -11,11 +12,9 @@ import java.util.List;
 @Component
 public class ComputerSpecification extends ParticularModelSpecification<Computer>{
 
-    public Specification<Computer> build(String country,String company,Boolean online,
-                                                Boolean installment,Double priceMin,Double priceMax,
-                                                String colour, String orderBy, String category, String processorType)
+    public Specification<Computer> build(ComputerParams params)
     {
-        return this.mainFilters(country, company, online, installment, priceMin, priceMax, colour, orderBy).and(addFilters(category, processorType));
+        return this.mainFilters(params).and(addFilters(params.getCategory(), params.getProcessor()));
     }
 
     public Specification<Computer> addFilters(String category, String processorType)

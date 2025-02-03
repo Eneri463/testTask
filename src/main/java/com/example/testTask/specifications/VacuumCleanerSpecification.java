@@ -1,5 +1,6 @@
 package com.example.testTask.specifications;
 
+import com.example.testTask.dto.VacuumCleanerParams;
 import com.example.testTask.models.VacuumCleaner;
 import jakarta.persistence.criteria.Predicate;
 import org.springframework.data.jpa.domain.Specification;
@@ -11,11 +12,9 @@ import java.util.List;
 @Component
 public class VacuumCleanerSpecification extends ParticularModelSpecification<VacuumCleaner>{
 
-    public Specification<VacuumCleaner> build(String country, String company, Boolean online,
-                                           Boolean installment, Double priceMin, Double priceMax,
-                                           String colour, String orderBy, Integer volume, Integer numberOfModes)
+    public Specification<VacuumCleaner> build(VacuumCleanerParams params)
     {
-        return this.mainFilters(country, company, online, installment, priceMin, priceMax, colour, orderBy).and(addFilters(volume, numberOfModes));
+        return this.mainFilters(params).and(addFilters(params.getVolume(), params.getNumber_of_modes()));
     }
 
     public Specification<VacuumCleaner> addFilters(Integer volume, Integer numberOfModes)

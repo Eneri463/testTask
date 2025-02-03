@@ -1,5 +1,6 @@
 package com.example.testTask.specifications;
 
+import com.example.testTask.dto.FridgeParams;
 import com.example.testTask.models.Fridge;
 import jakarta.persistence.criteria.Predicate;
 import org.springframework.data.jpa.domain.Specification;
@@ -11,11 +12,9 @@ import java.util.List;
 @Component
 public class FridgeSpecification extends ParticularModelSpecification<Fridge>{
 
-    public Specification<Fridge> build(String country, String company, Boolean online,
-                                         Boolean installment, Double priceMin, Double priceMax,
-                                         String colour, String orderBy, Integer numberOfDoors, String compressorType)
+    public Specification<Fridge> build(FridgeParams params)
     {
-        return this.mainFilters(country, company, online, installment, priceMin, priceMax, colour, orderBy).and(addFilters(numberOfDoors, compressorType));
+        return this.mainFilters(params).and(addFilters(params.getNumber_of_doors(), params.getCompressor()));
     }
 
     public Specification<Fridge> addFilters(Integer numberOfDoors, String compressorType)
