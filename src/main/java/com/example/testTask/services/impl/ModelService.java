@@ -13,7 +13,7 @@ import java.util.List;
 public class ModelService implements ModelServiceInterface {
 
         @Autowired
-        ModelRepository repository;
+        private ModelRepository repository;
 
         @Override
         public List<Model> getAllModels(Specification<Model> spec)

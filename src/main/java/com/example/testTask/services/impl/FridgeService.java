@@ -13,7 +13,7 @@ import java.util.List;
 public class FridgeService implements FridgeServiceInterface {
 
     @Autowired
-    FridgeRepository repository;
+    private FridgeRepository repository;
 
     @Override
     public List<Fridge> getAllFridges(Specification<Fridge> spec)

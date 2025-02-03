@@ -14,7 +14,7 @@ import java.util.List;
 public class ComputerService implements ComputerServiceInterface {
 
     @Autowired
-    ComputerRepository repository;
+    private ComputerRepository repository;
 
     @Override
     public List<Computer> getAllComputers(Specification<Computer> spec)

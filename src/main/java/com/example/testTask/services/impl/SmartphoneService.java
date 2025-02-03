@@ -14,7 +14,7 @@ import java.util.List;
 public class SmartphoneService implements SmartphoneServiceInterface {
 
     @Autowired
-    SmartphoneRepository repository;
+    private SmartphoneRepository repository;
 
     @Override
     public List<Smartphone> getAllSmartphones(Specification<Smartphone> spec)

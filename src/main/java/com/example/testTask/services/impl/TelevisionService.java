@@ -13,7 +13,7 @@ import java.util.List;
 public class TelevisionService implements TelevisionServiceInterface {
 
     @Autowired
-    TelevisionRepository repository;
+    private TelevisionRepository repository;
 
     @Override
     public List<Television> getAllTelevisions(Specification<Television> spec)

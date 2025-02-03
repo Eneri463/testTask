@@ -13,7 +13,7 @@ import java.util.List;
 public class VacuumCleanerService implements VacuumCleanerServiceInterface {
 
     @Autowired
-    VacuumCleanerRepository repository;
+    private VacuumCleanerRepository repository;
 
     @Override
     public List<VacuumCleaner> getAllVacuumCleaners(Specification<VacuumCleaner> spec)
