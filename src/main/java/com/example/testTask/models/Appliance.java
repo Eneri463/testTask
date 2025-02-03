@@ -26,7 +26,7 @@ public class Appliance {
     @NotNull
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "appliance_id")
-    private ApplianceType name; // наименование товара
+    private ApplianceType type; // вид товара
 
     @NotNull
     @ManyToOne(fetch = FetchType.LAZY)
@@ -45,9 +45,6 @@ public class Appliance {
     @NotNull
     @Column(name = "installment_plan")
     private boolean installmentPlan; // возможность оплаты в рассрочку
-
-    @OneToMany(mappedBy = "appliance", cascade = CascadeType.ALL)
-    Set<Model> modelsList = new HashSet<>();
 
 
 }

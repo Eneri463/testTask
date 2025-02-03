@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Smartphones {
+public class Smartphone {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
