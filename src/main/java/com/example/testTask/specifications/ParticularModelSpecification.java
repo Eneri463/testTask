@@ -12,7 +12,7 @@ import java.util.List;
 
 public class ParticularModelSpecification <T>{
 
-    public Specification<T> mainFilters(String type, String countryName, String companyName, Boolean online,
+    public Specification<T> mainFilters(String countryName, String companyName, Boolean online,
                                         Boolean installment, Double priceMin, Double priceMax,
                                         String colourName, String orderBy) {
         return (root, query, cb) -> {
@@ -28,7 +28,6 @@ public class ParticularModelSpecification <T>{
             appliance.fetch("producerCountry");
             appliance.fetch("producerCompany");
 
-            list.add(cb.equal(cb.upper(root.get("model").get("appliance").get("type").get("name")), type));
             if (countryName != null ) list.add(cb.equal(cb.upper(root.get("model").get("appliance").get("producerCountry").get("name")), countryName.toUpperCase()));
             if (companyName != null ) list.add(cb.equal(cb.upper(root.get("model").get("appliance").get("producerCompany").get("name")), companyName.toUpperCase()));
             if (online != null ) list.add(cb.equal(root.get("model").get("appliance").get("onlineOrder"), online));
@@ -43,12 +42,12 @@ public class ParticularModelSpecification <T>{
 
                 if (partOfOrder[0].toUpperCase() == "PRICE")
                     if (partOfOrder.length > 1 && partOfOrder[1].toUpperCase() == "DESC")
-                        query.orderBy(cb.desc(root.get("price")));
-                    else query.orderBy(cb.asc(root.get("price")));
+                        query.orderBy(cb.desc(root.get("model").get("price")));
+                    else query.orderBy(cb.asc(root.get("model").get("price")));
                 else if (partOfOrder.length > 1 && partOfOrder[1].toUpperCase() == "DESC")
-                    query.orderBy(cb.desc(root.get("name")));
-                else query.orderBy(cb.asc(root.get("name")));
-            } else query.orderBy(cb.asc(root.get("name")));
+                    query.orderBy(cb.desc(root.get("model").get("name")));
+                else query.orderBy(cb.asc(root.get("model").get("name")));
+            } else query.orderBy(cb.asc(root.get("model").get("name")));
 
             Predicate[] p = new Predicate[list.size()];
 
