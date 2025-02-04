@@ -4,6 +4,7 @@ import com.example.testTask.dto.*;
 import com.example.testTask.models.*;
 import com.example.testTask.services.*;
 import com.example.testTask.specifications.*;
+import io.swagger.v3.oas.annotations.Parameter;
 import lombok.AllArgsConstructor;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.data.jpa.domain.Specification;
@@ -21,7 +22,10 @@ public class ModelController {
 
     @GetMapping(value= "/models", params = "!type")
     public ResponseEntity<List<ModelDTO>> getAllAppliances(
-            ParamsDTO paramsDTO
+            @Parameter(description = "Эти параметры применяются, когда параметр type отсутствует (равен null). Такой запрос позволяет " +
+                    "просмотреть всю технику независимо от её вида (по общим атрибутам). Тело ответа - ModelDTO." +
+                    "Для сортировки укажите столбец сортировки (name, price) и по желанию тип (asc,desc) " +
+                    "(например, sort=price,desc). Для поиска используйте параметр search") ParamsDTO paramsDTO
     )
     {
         Specification<Model> spec = GeneralSpecification.mainFilters(paramsDTO);

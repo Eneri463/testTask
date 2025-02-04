@@ -10,6 +10,7 @@ import com.example.testTask.services.FridgeCompressorTypeServiceInterface;
 import com.example.testTask.services.FridgeServiceInterface;
 import com.example.testTask.services.impl.CreateCurrentModelService;
 import com.example.testTask.specifications.FridgeSpecification;
+import io.swagger.v3.oas.annotations.Parameter;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -35,7 +36,9 @@ public class FridgeController {
 
     @GetMapping(value= "/models", params = "type=fridge")
     public ResponseEntity<List<FridgeDTO>> getFridges(
-            FridgeParams fridgeParams
+            @Parameter(description = "Используйте параметр type=fridge с этими параметрами. Тело ответа - FridgeDTO" +
+                    "Для сортировки укажите столбец сортировки (name, price) и по желанию тип (asc,desc) " +
+                    "(например, sort=price,desc). Для поиска используйте параметр search") FridgeParams fridgeParams
     )
     {
         Specification<Fridge> spec = fridgeSpecification.build(fridgeParams);
@@ -43,7 +46,10 @@ public class FridgeController {
     }
 
     @PostMapping("/model/create/fridge")
-    public ResponseEntity<FridgeDTO> createComputer(@Valid @RequestBody FridgeRequestDTO request) {
+    public ResponseEntity<FridgeDTO> createComputer(
+            @io.swagger.v3.oas.annotations.parameters.RequestBody(description = "Все значения NotNull. ApplianceId - id таблицы " +
+                    "'техника'(сущность appliance), с которой будет связана добавляемая модель холодильника")
+            @RequestBody @Valid FridgeRequestDTO request) {
 
         FridgeCompressorType compressorType = fridgeCompressorTypeService.getByName(request.getCompressor());
 

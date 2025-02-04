@@ -7,6 +7,7 @@ import com.example.testTask.models.*;
 import com.example.testTask.services.*;
 import com.example.testTask.services.impl.CreateCurrentModelService;
 import com.example.testTask.specifications.TelevisionSpecification;
+import io.swagger.v3.oas.annotations.Parameter;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -33,7 +34,10 @@ public class TelevisionController {
 
     @GetMapping(value= "/models", params = "type=television")
     public ResponseEntity<List<TelevisionDTO>> getTelevisions(
-            TelevisionParams televisionParams
+            @Parameter(description = "Используйте параметр type=television с этими параметрами. " +
+                    "Тело ответа - TelevisionDTO Для сортировки укажите столбец сортировки (name, price) " +
+                    "и по желанию тип (asc,desc) (например, sort=price,desc). " +
+                    "Для поиска используйте параметр search")  TelevisionParams televisionParams
     )
     {
         Specification<Television> spec = televisionSpecification.build(televisionParams);
@@ -41,7 +45,10 @@ public class TelevisionController {
     }
 
     @PostMapping("/model/create/television")
-    public ResponseEntity<TelevisionDTO> createTelevision(@Valid @RequestBody TelevisionRequestDTO request)
+    public ResponseEntity<TelevisionDTO> createTelevision(
+            @io.swagger.v3.oas.annotations.parameters.RequestBody(description = "Все значения NotNull. ApplianceId - id таблицы " +
+                    "'техника'(сущность appliance), с которой будет связана добавляемая модель телевизора")
+            @RequestBody @Valid TelevisionRequestDTO request)
     {
         TelevisionCategory category = televisionCategoryService.getByName(request.getCategory());
 

@@ -8,6 +8,7 @@ import com.example.testTask.models.Smartphone;
 import com.example.testTask.services.SmartphoneServiceInterface;
 import com.example.testTask.services.impl.CreateCurrentModelService;
 import com.example.testTask.specifications.SmartphoneSpecification;
+import io.swagger.v3.oas.annotations.Parameter;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -32,7 +33,10 @@ public class SmartphoneController {
 
     @GetMapping(value= "/models", params = "type=smartphone")
     public ResponseEntity<List<SmartphoneDTO>> getSmartphones(
-            SmartphoneParams smartphoneParams
+            @Parameter(description = "Используйте параметр type=smartphone с этими параметрами. " +
+                    "Тело ответа - SmartphoneDTO. Для сортировки укажите столбец сортировки (name, price) " +
+                    "и по желанию тип (asc,desc) (например, sort=price,desc). " +
+                    "Для поиска используйте параметр search") SmartphoneParams smartphoneParams
     )
     {
         Specification<Smartphone> spec = smartphoneSpecification.build(smartphoneParams);
@@ -40,7 +44,10 @@ public class SmartphoneController {
     }
 
     @PostMapping("/model/create/smartphone")
-    public ResponseEntity<SmartphoneDTO> createSmartphone(@Valid @RequestBody SmartphoneRequestDTO request)
+    public ResponseEntity<SmartphoneDTO> createSmartphone(
+            @io.swagger.v3.oas.annotations.parameters.RequestBody(description = "Все значения NotNull. ApplianceId - id таблицы " +
+                    "'техника'(сущность appliance), с которой будет связана добавляемая модель смартфона")
+            @RequestBody @Valid SmartphoneRequestDTO request)
     {
         Model model = createCurrentModelService.createModel(request);
 

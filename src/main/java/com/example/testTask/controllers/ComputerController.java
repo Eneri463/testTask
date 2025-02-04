@@ -13,6 +13,7 @@ import com.example.testTask.services.ComputerProcessorTypeServiceInterface;
 import com.example.testTask.services.ComputerServiceInterface;
 import com.example.testTask.services.impl.CreateCurrentModelService;
 import com.example.testTask.specifications.ComputerSpecification;
+import io.swagger.v3.oas.annotations.Parameter;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -39,7 +40,9 @@ public class ComputerController {
 
     @GetMapping(value= "/models", params = "type=computer")
     public ResponseEntity<List<ComputerDTO>> getComputers(
-            ComputerParams computerParams
+            @Parameter(description = "Используйте type=computer с этими параметрами. Тело ответа - ComputerDTO. " +
+                    "Для сортировки укажите столбец сортировки (name, price) и по желанию тип (asc,desc) " +
+                    "(например, sort=price,desc). Для поиска используйте параметр search") ComputerParams computerParams
     )
     {
         Specification<Computer> spec = computerSpecification.build(computerParams);
@@ -47,7 +50,11 @@ public class ComputerController {
     }
 
     @PostMapping("/model/create/computer")
-    public ResponseEntity<ComputerDTO> createComputer(@Valid @RequestBody ComputerRequestDTO request)
+    public ResponseEntity<ComputerDTO> createComputer
+            (@io.swagger.v3.oas.annotations.parameters.RequestBody(description = "Все значения NotNull. " +
+                    "ApplianceId - id таблицы 'техника'(сущность appliance), с которой будет " +
+                    "связана добавляемая модель компьютера")
+             @RequestBody @Valid ComputerRequestDTO request)
     {
 
         ComputerCategory category = computerCategoryService.getByName(request.getCategory());

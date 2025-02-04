@@ -8,6 +8,7 @@ import com.example.testTask.models.VacuumCleaner;
 import com.example.testTask.services.VacuumCleanerServiceInterface;
 import com.example.testTask.services.impl.CreateCurrentModelService;
 import com.example.testTask.specifications.VacuumCleanerSpecification;
+import io.swagger.v3.oas.annotations.Parameter;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -32,9 +33,12 @@ public class VacuumCleanerController {
 
 
 
-    @GetMapping(value= "/models", params = "type=vacuumCleaner")
+    @GetMapping(value= "/models", params = "type=vacuum_cleaner")
     public ResponseEntity<List<VacuumCleanerDTO>> getVacuumCleaners(
-            VacuumCleanerParams vacuumCleanerParams
+            @Parameter(description = "Используйте параметр type=vacuum_cleaner с этими параметрами. " +
+                    "Тело ответа - VacuumCleanerDTO Для сортировки укажите столбец сортировки " +
+                    "(name, price) и по желанию тип (asc,desc) (например, sort=price,desc). " +
+                    "Для поиска используйте параметр search")  VacuumCleanerParams vacuumCleanerParams
     )
     {
         Specification<VacuumCleaner> spec = vacuumCleanerSpecification.build(vacuumCleanerParams);
@@ -42,7 +46,10 @@ public class VacuumCleanerController {
     }
 
     @PostMapping("/model/create/vacuumCleaner")
-    public ResponseEntity<VacuumCleanerDTO> createVacuumCleaner(@Valid @RequestBody VacuumCleanerRequestDTO request)
+    public ResponseEntity<VacuumCleanerDTO> createVacuumCleaner(
+            @io.swagger.v3.oas.annotations.parameters.RequestBody(description = "Все значения NotNull. ApplianceId - id таблицы " +
+                    "'техника'(сущность appliance), с которой будет связана добавляемая модель пылесоса")
+            @RequestBody @Valid VacuumCleanerRequestDTO request)
     {
         Model model = createCurrentModelService.createModel(request);
         VacuumCleaner vacuumCleaner = new VacuumCleaner(null, request.getVolume(), request.getNumberOfModes(), model);

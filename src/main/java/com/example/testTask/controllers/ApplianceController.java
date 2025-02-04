@@ -14,7 +14,6 @@ import lombok.AllArgsConstructor;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -33,7 +32,10 @@ public class ApplianceController {
 
     @PostMapping(value= "/appliance/create")
     public ResponseEntity<ApplianceDTO> createAppliance(
-            @Valid @RequestBody ApplianceDTO request
+            @Valid
+            @io.swagger.v3.oas.annotations.parameters.RequestBody(description = "ApplianceId необязательный параметр, остальные значения NotNull")
+            @RequestBody
+            ApplianceDTO request
     )
     {
         boolean flag = false; // проверка, было ли хотя бы одно введённое значение уникальным
