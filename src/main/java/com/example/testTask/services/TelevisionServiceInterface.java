@@ -8,4 +8,5 @@ import java.util.List;
 public interface TelevisionServiceInterface {
 
     public List<Television> getAllTelevisions(Specification<Television> spec);
+    public Television create(Television television);
 }

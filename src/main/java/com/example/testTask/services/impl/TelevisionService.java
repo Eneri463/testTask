@@ -20,4 +20,10 @@ public class TelevisionService implements TelevisionServiceInterface {
     {
         return repository.findAll(spec);
     }
+
+    @Override
+    public Television create(Television television)
+    {
+        return repository.save(television);
+    }
 }

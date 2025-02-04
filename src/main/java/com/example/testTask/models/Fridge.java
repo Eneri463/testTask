@@ -1,5 +1,6 @@
 package com.example.testTask.models;
 
+import com.example.testTask.dto.FridgeDTO;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -30,4 +31,18 @@ public class Fridge {
     @OneToOne
     @JoinColumn(name = "model_id")
     private Model model;
+
+    public void fridgeToDTO(FridgeDTO res)
+    {
+        model.modelToModelDTO(res);
+        res.setNumberOfDoors(this.numberOfDoors);
+        res.setCompressor(this.compressorType.getName());
+    }
+
+    public FridgeDTO createDTO()
+    {
+        FridgeDTO res = new FridgeDTO();
+        fridgeToDTO(res);
+        return res;
+    }
 }

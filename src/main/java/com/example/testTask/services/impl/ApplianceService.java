@@ -32,7 +32,7 @@ public class ApplianceService implements ApplianceServiceInterface {
     }
 
     @Override
-    public List<Appliance> getByTypeCompanyCountry(ApplianceType type, ProducerCompany company, ProducerCountry country)
+    public Appliance getByTypeCompanyCountry(ApplianceType type, ProducerCompany company, ProducerCountry country)
     {
         return repository.findByIds(type, company, country);
     }

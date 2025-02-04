@@ -19,4 +19,9 @@ public class SizeService implements SizeServiceInterface {
         return repository.getByNameIgnoreCaseAndAppliance(name, type);
     }
 
+    @Override
+    public Size create(Size size)
+    {
+        return repository.save(size);
+    }
 }

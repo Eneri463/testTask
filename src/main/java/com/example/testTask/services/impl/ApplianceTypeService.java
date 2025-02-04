@@ -16,4 +16,10 @@ public class ApplianceTypeService implements ApplianceTypeServiceInterface {
     {
         return repository.getByNameIgnoreCase(name);
     }
+
+    @Override
+    public ApplianceType create(ApplianceType type)
+    {
+        return repository.save(type);
+    }
 }

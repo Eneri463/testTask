@@ -17,4 +17,10 @@ public class ProducerCountryService implements ProducerCountryServiceInterface {
     {
         return repository.getByNameIgnoreCase(name);
     }
+
+    @Override
+    public ProducerCountry create(ProducerCountry country)
+    {
+        return repository.save(country);
+    }
 }

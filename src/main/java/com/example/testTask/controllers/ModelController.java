@@ -17,72 +17,15 @@ import java.util.List;
 @EnableAutoConfiguration
 @AllArgsConstructor
 public class ModelController {
-
-    TelevisionSpecification televisionSpecification;
-    VacuumCleanerSpecification vacuumCleanerSpecification;
-    FridgeSpecification fridgeSpecification;
-    SmartphoneSpecification smartphoneSpecification;
-    ComputerSpecification computerSpecification;
-
-    ModelServiceInterface allModelsService;
-    TelevisionServiceInterface televisionService;
-    VacuumCleanerServiceInterface vacuumCleanerService;
-    FridgeServiceInterface fridgeService;
-    SmartphoneServiceInterface smartphoneService;
-    ComputerServiceInterface computerService;
+    ModelServiceInterface modelService;
 
     @GetMapping(value= "/models", params = "!type")
     public ResponseEntity<List<Model>> getAllAppliances(
-            PostParamsDTO postParamsDTO
+            ParamsDTO paramsDTO
     )
     {
-        Specification<Model> spec = GeneralSpecification.mainFilters(postParamsDTO);
-        return ResponseEntity.ok(allModelsService.getAllModels(spec));
-    }
-
-    @GetMapping(value= "/models", params = "type=television")
-    public ResponseEntity<List<Television>> getTelevisions(
-            TelevisionParams televisionParams
-    )
-    {
-        Specification<Television> spec = televisionSpecification.build(televisionParams);
-        return ResponseEntity.ok(televisionService.getAllTelevisions(spec));
-    }
-
-    @GetMapping(value= "/models", params = "type=vacuumCleaner")
-    public ResponseEntity<List<VacuumCleaner>> getVacuumCleaners(
-            VacuumCleanerParams vacuumCleanerParams
-    )
-    {
-        Specification<VacuumCleaner> spec = vacuumCleanerSpecification.build(vacuumCleanerParams);
-        return ResponseEntity.ok(vacuumCleanerService.getAllVacuumCleaners(spec));
-    }
-
-    @GetMapping(value= "/models", params = "type=fridge")
-    public ResponseEntity<List<Fridge>> getFridges(
-            FridgeParams fridgeParams
-    )
-    {
-        Specification<Fridge> spec = fridgeSpecification.build(fridgeParams);
-        return ResponseEntity.ok(fridgeService.getAllFridges(spec));
-    }
-
-    @GetMapping(value= "/models", params = "type=smartphone")
-    public ResponseEntity<List<Smartphone>> getSmartphones(
-            SmartphonesParams smartphonesParams
-    )
-    {
-        Specification<Smartphone> spec = smartphoneSpecification.build(smartphonesParams);
-        return ResponseEntity.ok(smartphoneService.getAllSmartphones(spec));
-    }
-
-    @GetMapping(value= "/models", params = "type=computer")
-    public ResponseEntity<List<Computer>> getComputers(
-            ComputerParams computerParams
-    )
-    {
-        Specification<Computer> spec = computerSpecification.build(computerParams);
-        return ResponseEntity.ok(computerService.getAllComputers(spec));
+        Specification<Model> spec = GeneralSpecification.mainFilters(paramsDTO);
+        return ResponseEntity.ok(modelService.getAllModels(spec));
     }
 
 }

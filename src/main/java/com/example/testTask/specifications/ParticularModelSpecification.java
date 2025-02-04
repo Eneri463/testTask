@@ -1,6 +1,6 @@
 package com.example.testTask.specifications;
 
-import com.example.testTask.dto.PostParamsDTO;
+import com.example.testTask.dto.ParamsDTO;
 import com.example.testTask.models.Appliance;
 import com.example.testTask.models.Model;
 import jakarta.persistence.criteria.Fetch;
@@ -13,7 +13,7 @@ import java.util.List;
 
 public class ParticularModelSpecification <T>{
 
-    public Specification<T> mainFilters(PostParamsDTO postParamsDTO) {
+    public Specification<T> mainFilters(ParamsDTO paramsDTO) {
         return (root, query, cb) -> {
 
             List<Predicate> list = new ArrayList<Predicate>();
@@ -28,20 +28,20 @@ public class ParticularModelSpecification <T>{
             appliance.fetch("producerCompany");
 
             // фильтрация
-            if (postParamsDTO.getCountry() != null ) list.add(cb.equal(root.get("model").get("appliance").get("producerCountry").get("name"), postParamsDTO.getCountry()));
-            if (postParamsDTO.getCompany() != null ) list.add(cb.equal(root.get("model").get("appliance").get("producerCompany").get("name"), postParamsDTO.getCompany()));
-            if (postParamsDTO.getOnline() != null ) list.add(cb.equal(root.get("model").get("appliance").get("onlineOrder"), postParamsDTO.getOnline()));
-            if (postParamsDTO.getInstallment() != null ) list.add(cb.equal(root.get("model").get("appliance").get("installmentPlan"), postParamsDTO.getInstallment()));
-            if (postParamsDTO.getMin_price() != null) list.add(cb.greaterThanOrEqualTo(root.get("model").get("price"), postParamsDTO.getMin_price()));
-            if (postParamsDTO.getMax_price() != null) list.add(cb.lessThanOrEqualTo(root.get("model").get("price"), postParamsDTO.getMax_price()));
-            if (postParamsDTO.getColour() != null ) list.add(cb.equal(root.get("model").get("colour"), postParamsDTO.getColour()));
-            if (postParamsDTO.getSize() != null ) list.add(cb.equal(root.get("model").get("size"), postParamsDTO.getSize()));
-            if (postParamsDTO.getSerial_number() != null ) list.add(cb.equal(root.get("model").get("serialNumber"), postParamsDTO.getSerial_number()));
+            if (paramsDTO.getCountry() != null ) list.add(cb.equal(root.get("model").get("appliance").get("producerCountry").get("name"), paramsDTO.getCountry()));
+            if (paramsDTO.getCompany() != null ) list.add(cb.equal(root.get("model").get("appliance").get("producerCompany").get("name"), paramsDTO.getCompany()));
+            if (paramsDTO.getOnline() != null ) list.add(cb.equal(root.get("model").get("appliance").get("onlineOrder"), paramsDTO.getOnline()));
+            if (paramsDTO.getInstallment() != null ) list.add(cb.equal(root.get("model").get("appliance").get("installmentPlan"), paramsDTO.getInstallment()));
+            if (paramsDTO.getMin_price() != null) list.add(cb.greaterThanOrEqualTo(root.get("model").get("price"), paramsDTO.getMin_price()));
+            if (paramsDTO.getMax_price() != null) list.add(cb.lessThanOrEqualTo(root.get("model").get("price"), paramsDTO.getMax_price()));
+            if (paramsDTO.getColour() != null ) list.add(cb.equal(root.get("model").get("colour"), paramsDTO.getColour()));
+            if (paramsDTO.getSize() != null ) list.add(cb.equal(root.get("model").get("size"), paramsDTO.getSize()));
+            if (paramsDTO.getSerial_number() != null ) list.add(cb.equal(root.get("model").get("serialNumber"), paramsDTO.getSerial_number()));
 
             // сортировка
-            if (postParamsDTO.getSort() != null) {
+            if (paramsDTO.getSort() != null) {
 
-                String[] partOfOrder = postParamsDTO.getSort().split(",");
+                String[] partOfOrder = paramsDTO.getSort().split(",");
 
                 if (partOfOrder[0].toUpperCase() == "PRICE")
                     if (partOfOrder.length > 1 && partOfOrder[1].toUpperCase() == "DESC")
@@ -53,12 +53,12 @@ public class ParticularModelSpecification <T>{
             } else query.orderBy(cb.asc(root.get("model").get("name")));
 
             // поиск
-            if (postParamsDTO.getSearch() != null)
+            if (paramsDTO.getSearch() != null)
             {
                 List<Predicate> list2 = new ArrayList<Predicate>();
                 Predicate[] p2 = new Predicate[list2.size()];
 
-                String requiredStr = "%"+ postParamsDTO.getSearch().toUpperCase() + "%";
+                String requiredStr = "%"+ paramsDTO.getSearch().toUpperCase() + "%";
 
                 list2.add(cb.like(cb.upper(root.get("model").get("name")), requiredStr));
                 list2.add(cb.like(cb.upper(root.get("model").get("appliance").get("producerCountry").get("name")), requiredStr));

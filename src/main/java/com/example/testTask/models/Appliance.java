@@ -1,14 +1,11 @@
 package com.example.testTask.models;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.example.testTask.dto.ApplianceDTO;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.util.HashSet;
-import java.util.Set;
 
 
 @Entity
@@ -45,6 +42,22 @@ public class Appliance {
     @NotNull
     @Column(name = "installment_plan")
     private boolean installmentPlan; // возможность оплаты в рассрочку
+
+    public void applianceToDTO(ApplianceDTO res)
+    {
+        res.setApplianceId(this.id);
+        res.setCompany(this.producerCompany.getName());
+        res.setCountry(this.producerCountry.getName());
+        res.setOnlineOrder(this.onlineOrder);
+        res.setInstallment(this.installmentPlan);
+    }
+
+    public ApplianceDTO createDTO()
+    {
+        ApplianceDTO res = new ApplianceDTO();
+        applianceToDTO(res);
+        return res;
+    }
 
 
 }

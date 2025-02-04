@@ -1,5 +1,6 @@
 package com.example.testTask.models;
 
+import com.example.testTask.dto.VacuumCleanerDTO;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -30,5 +31,19 @@ public class VacuumCleaner {
     @OneToOne
     @JoinColumn(name = "model_id")
     private Model model;
+
+    public void vacuumCleanerToDTO(VacuumCleanerDTO res)
+    {
+        model.modelToModelDTO(res);
+        res.setVolume(this.volume);
+        res.setNumberOfModes(this.numberOfModes);
+    }
+
+    public VacuumCleanerDTO createDTO()
+    {
+        VacuumCleanerDTO res = new VacuumCleanerDTO();
+        vacuumCleanerToDTO(res);
+        return res;
+    }
 
 }

@@ -1,5 +1,6 @@
 package com.example.testTask.models;
 
+import com.example.testTask.dto.SmartphoneDTO;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -30,5 +31,19 @@ public class Smartphone {
     @OneToOne
     @JoinColumn(name = "model_id")
     private Model model;
+
+    public void smartphoneToDTO(SmartphoneDTO res)
+    {
+        model.modelToModelDTO(res);
+        res.setMemorySize(this.memorySize);
+        res.setNumberOfCameras(this.numberOfCameras);
+    }
+
+    public SmartphoneDTO createDTO()
+    {
+        SmartphoneDTO res = new SmartphoneDTO();
+        smartphoneToDTO(res);
+        return res;
+    }
 
 }

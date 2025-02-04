@@ -10,6 +10,6 @@ import java.util.List;
 public interface ApplianceServiceInterface {
     public List<Appliance> getAll();
     public Appliance getById(Long id);
-    public List<Appliance> getByTypeCompanyCountry(ApplianceType type, ProducerCompany company, ProducerCountry country);
+    public Appliance getByTypeCompanyCountry(ApplianceType type, ProducerCompany company, ProducerCountry country);
     public Appliance save(Appliance appliance);
 }

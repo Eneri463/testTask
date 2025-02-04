@@ -3,7 +3,7 @@ package com.example.testTask.dto;
 import lombok.Data;
 
 @Data
-public class PostParamsDTO {
+public class ParamsDTO {
 
     private String type; // вид техники
     private String search; // строка для поиска по наименованию

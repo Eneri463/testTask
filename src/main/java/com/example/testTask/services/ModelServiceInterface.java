@@ -8,5 +8,6 @@ import java.util.List;
 public interface ModelServiceInterface {
 
     public List<Model> getAllModels(Specification<Model> spec);
+    public Model create(Model model);
 
 }

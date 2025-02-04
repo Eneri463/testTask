@@ -20,4 +20,10 @@ public class ModelService implements ModelServiceInterface {
         {
             return repository.findAll(spec);
         }
+
+        @Override
+        public Model create(Model model)
+        {
+                return repository.save(model);
+        }
 }

@@ -19,5 +19,5 @@ public interface ApplianceRepository extends JpaRepository<Appliance, Long> {
             WHERE o.type = :type AND o.producerCountry = :country
             AND o.producerCompany = :company
             """)
-    List<Appliance> findByIds(@Param("type") ApplianceType type, @Param("company") ProducerCompany company, @Param("country") ProducerCountry country);
+    Appliance findByIds(@Param("type") ApplianceType type, @Param("company") ProducerCompany company, @Param("country") ProducerCountry country);
 }

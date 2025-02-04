@@ -1,5 +1,6 @@
 package com.example.testTask.models;
 
+import com.example.testTask.dto.ModelDTO;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -47,6 +48,26 @@ public class Model {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "appliances_id")
     private Appliance appliance; // к какой технике относится
+
+    public void modelToModelDTO(ModelDTO res)
+    {
+        appliance.applianceToDTO(res);
+        res.setModelId(this.id);
+        res.setName(this.name);
+        res.setSerialNumber(this.serialNumber);
+        res.setColour(this.colour.getName());
+        res.setSize(this.size.getSize());
+        res.setPrice(this.price);
+        res.setAvailable(this.available);
+    }
+
+    public ModelDTO createDTO()
+    {
+        ModelDTO res = new ModelDTO();
+        modelToModelDTO(res);
+
+        return res;
+    }
 
 
 }

@@ -1,5 +1,6 @@
 package com.example.testTask.models;
 
+import com.example.testTask.dto.ComputerDTO;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -32,4 +33,18 @@ public class Computer {
     @OneToOne
     @JoinColumn(name = "model_id")
     private Model model;
+
+    public void computerToDTO(ComputerDTO res)
+    {
+        model.modelToModelDTO(res);
+        res.setCategory(this.category.getName());
+        res.setProcessor(this.processorType.getName());
+    }
+
+    public ComputerDTO createDTO()
+    {
+        ComputerDTO res = new ComputerDTO();
+        computerToDTO(res);
+        return res;
+    }
 }

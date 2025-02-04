@@ -17,4 +17,10 @@ public class ProducerCompanyService implements ProducerCompanyServiceInterface {
     {
         return repository.getByNameIgnoreCase(name);
     }
+
+    @Override
+    public ProducerCompany create(ProducerCompany company)
+    {
+        return repository.save(company);
+    }
 }

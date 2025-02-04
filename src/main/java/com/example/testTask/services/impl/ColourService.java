@@ -17,4 +17,10 @@ public class ColourService implements ColourServiceInterface {
     {
         return repository.getByNameIgnoreCase(name);
     }
+
+    @Override
+    public Colour create(Colour colour)
+    {
+        return repository.save(colour);
+    }
 }

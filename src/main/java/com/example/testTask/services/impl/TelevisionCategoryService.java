@@ -17,4 +17,10 @@ public class TelevisionCategoryService implements TelevisionCategoryServiceInter
     {
         return repository.getByNameIgnoreCase(name);
     }
+
+    @Override
+    public TelevisionCategory create(TelevisionCategory category)
+    {
+        return repository.save(category);
+    }
 }

@@ -1,5 +1,6 @@
 package com.example.testTask.models;
 
+import com.example.testTask.dto.TelevisionDTO;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -31,4 +32,18 @@ public class Television {
     @OneToOne
     @JoinColumn(name = "model_id")
     private Model model;
+
+    public void televisionToDTO(TelevisionDTO res)
+    {
+        model.modelToModelDTO(res);
+        res.setCategory(this.category.getName());
+        res.setTechnology(this.technology.getName());
+    }
+
+    public TelevisionDTO createDTO()
+    {
+        TelevisionDTO res = new TelevisionDTO();
+        televisionToDTO(res);
+        return res;
+    }
 }
