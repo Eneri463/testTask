@@ -14,6 +14,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -29,11 +30,10 @@ public class ApplianceController {
     private ProducerCountryServiceInterface producerCountryService;
     private ProducerCompanyServiceInterface producerCompanyService;
 
-    @PostMapping(value= "/appliance/create")
-    @Valid
-    public ResponseEntity<ApplianceDTO> createAppliance(
-            @RequestBody ApplianceDTO request
 
+    @PostMapping(value= "/appliance/create")
+    public ResponseEntity<ApplianceDTO> createAppliance(
+            @Valid @RequestBody ApplianceDTO request
     )
     {
         boolean flag = false; // проверка, было ли хотя бы одно введённое значение уникальным
@@ -59,7 +59,7 @@ public class ApplianceController {
         if (country == null)
         {
             flag = true;
-            company = producerCompanyService.create(new ProducerCompany(null, request.getCompany()));
+            country = producerCountryService.create(new ProducerCountry(null, request.getCountry()));
         }
 
         Appliance appliance;

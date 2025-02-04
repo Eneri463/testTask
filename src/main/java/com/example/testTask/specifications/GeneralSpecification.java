@@ -34,8 +34,8 @@ public class GeneralSpecification {
             if (paramsDTO.getInstallment() != null ) list.add(cb.equal(root.get("appliance").get("installmentPlan"), paramsDTO.getInstallment()));
             if (paramsDTO.getMin_price() != null) list.add(cb.greaterThanOrEqualTo(root.get("price"), paramsDTO.getMin_price()));
             if (paramsDTO.getMax_price() != null) list.add(cb.lessThanOrEqualTo(root.get("price"), paramsDTO.getMax_price()));
-            if (paramsDTO.getColour() != null ) list.add(cb.equal(root.get("colour"), paramsDTO.getColour()));
-            if (paramsDTO.getSize() != null ) list.add(cb.equal(root.get("size"), paramsDTO.getSize()));
+            if (paramsDTO.getColour() != null ) list.add(cb.equal(root.get("colour").get("name"), paramsDTO.getColour()));
+            if (paramsDTO.getSize() != null ) list.add(cb.equal(root.get("size").get("size"), paramsDTO.getSize()));
             if (paramsDTO.getSerial_number() != null ) list.add(cb.equal(root.get("serialNumber"), paramsDTO.getSerial_number()));
 
             // сортировка
@@ -43,11 +43,11 @@ public class GeneralSpecification {
 
                 String[] partOfOrder = paramsDTO.getSort().split(",");
 
-                if (partOfOrder[0].toUpperCase() == "PRICE")
-                    if (partOfOrder.length > 1 && partOfOrder[1].toUpperCase() == "DESC")
+                if (partOfOrder[0].toUpperCase().equals("PRICE"))
+                    if (partOfOrder.length > 1 && partOfOrder[1].toUpperCase().equals("DESC"))
                         query.orderBy(cb.desc(root.get("price")));
                     else query.orderBy(cb.asc(root.get("price")));
-                else if (partOfOrder.length > 1 && partOfOrder[1].toUpperCase() == "DESC")
+                else if (partOfOrder.length > 1 && partOfOrder[1].toUpperCase().equals("DESC"))
                     query.orderBy(cb.desc(root.get("name")));
                 else query.orderBy(cb.asc(root.get("name")));
 

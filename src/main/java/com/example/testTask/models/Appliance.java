@@ -46,6 +46,7 @@ public class Appliance {
     public void applianceToDTO(ApplianceDTO res)
     {
         res.setApplianceId(this.id);
+        res.setType(this.getType().getName());
         res.setCompany(this.producerCompany.getName());
         res.setCountry(this.producerCountry.getName());
         res.setOnlineOrder(this.onlineOrder);

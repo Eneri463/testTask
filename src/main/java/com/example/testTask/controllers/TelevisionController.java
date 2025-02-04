@@ -41,18 +41,17 @@ public class TelevisionController {
     }
 
     @PostMapping("/model/create/television")
-    @Valid
-    public ResponseEntity<TelevisionDTO> createTelevision(@RequestBody TelevisionRequestDTO request)
+    public ResponseEntity<TelevisionDTO> createTelevision(@Valid @RequestBody TelevisionRequestDTO request)
     {
         TelevisionCategory category = televisionCategoryService.getByName(request.getCategory());
 
         if (category == null)
-            category = televisionCategoryService.create(new TelevisionCategory());
+            category = televisionCategoryService.create(new TelevisionCategory(null, request.getCategory()));
 
         TelevisionTechnology technology = televisionTechnologyService.getByName(request.getTechnology());
 
         if (technology == null)
-            technology =televisionTechnologyService.create(new TelevisionTechnology(null, request.getTechnology()));
+            technology = televisionTechnologyService.create(new TelevisionTechnology(null, request.getTechnology()));
 
         Model model = createCurrentModelService.createModel(request);
 

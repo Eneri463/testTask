@@ -4,13 +4,19 @@ import com.example.testTask.dto.ModelDTO;
 import com.example.testTask.dto.ModelRequestDTO;
 import com.example.testTask.models.*;
 import com.example.testTask.services.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
 public class CreateCurrentModelService {
+    @Autowired
     ApplianceServiceInterface applianceService;
+    @Autowired
     ColourServiceInterface colourService;
+    @Autowired
     SizeServiceInterface sizeService;
+    @Autowired
+    ModelServiceInterface modelService;
 
     public Model createModel(ModelRequestDTO request)
     {
@@ -26,8 +32,8 @@ public class CreateCurrentModelService {
         if (size == null)
             size = sizeService.create(new Size(null, request.getSize(), appliance.getType()));
 
-        Model model = new Model(null, colour.getName(), request.getSerialNumber(), colour, size, request.getPrice(), request.isAvailable(), appliance);
+        Model model = new Model(null, request.getName(), request.getSerialNumber(), colour, size, request.getPrice(), request.isAvailable(), appliance);
 
-        return model;
+        return modelService.create(model);
     }
 }

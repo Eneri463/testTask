@@ -34,8 +34,8 @@ public class ParticularModelSpecification <T>{
             if (paramsDTO.getInstallment() != null ) list.add(cb.equal(root.get("model").get("appliance").get("installmentPlan"), paramsDTO.getInstallment()));
             if (paramsDTO.getMin_price() != null) list.add(cb.greaterThanOrEqualTo(root.get("model").get("price"), paramsDTO.getMin_price()));
             if (paramsDTO.getMax_price() != null) list.add(cb.lessThanOrEqualTo(root.get("model").get("price"), paramsDTO.getMax_price()));
-            if (paramsDTO.getColour() != null ) list.add(cb.equal(root.get("model").get("colour"), paramsDTO.getColour()));
-            if (paramsDTO.getSize() != null ) list.add(cb.equal(root.get("model").get("size"), paramsDTO.getSize()));
+            if (paramsDTO.getColour() != null ) list.add(cb.equal(root.get("model").get("colour").get("name"), paramsDTO.getColour()));
+            if (paramsDTO.getSize() != null ) list.add(cb.equal(root.get("model").get("size").get("size"), paramsDTO.getSize()));
             if (paramsDTO.getSerial_number() != null ) list.add(cb.equal(root.get("model").get("serialNumber"), paramsDTO.getSerial_number()));
 
             // сортировка
@@ -43,11 +43,11 @@ public class ParticularModelSpecification <T>{
 
                 String[] partOfOrder = paramsDTO.getSort().split(",");
 
-                if (partOfOrder[0].toUpperCase() == "PRICE")
-                    if (partOfOrder.length > 1 && partOfOrder[1].toUpperCase() == "DESC")
+                if (partOfOrder[0].toUpperCase().equals("PRICE"))
+                    if (partOfOrder.length > 1 && partOfOrder[1].toUpperCase().equals("DESC"))
                         query.orderBy(cb.desc(root.get("model").get("price")));
                     else query.orderBy(cb.asc(root.get("model").get("price")));
-                else if (partOfOrder.length > 1 && partOfOrder[1].toUpperCase() == "DESC")
+                else if (partOfOrder.length > 1 && partOfOrder[1].toUpperCase().equals("DESC"))
                     query.orderBy(cb.desc(root.get("model").get("name")));
                 else query.orderBy(cb.asc(root.get("model").get("name")));
             } else query.orderBy(cb.asc(root.get("model").get("name")));

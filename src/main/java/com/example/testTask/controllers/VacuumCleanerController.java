@@ -16,6 +16,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -41,8 +42,7 @@ public class VacuumCleanerController {
     }
 
     @PostMapping("/model/create/vacuumCleaner")
-    @Valid
-    public ResponseEntity<VacuumCleanerDTO> createVacuumCleaner(VacuumCleanerRequestDTO request)
+    public ResponseEntity<VacuumCleanerDTO> createVacuumCleaner(@Valid @RequestBody VacuumCleanerRequestDTO request)
     {
         Model model = createCurrentModelService.createModel(request);
         VacuumCleaner vacuumCleaner = new VacuumCleaner(null, request.getVolume(), request.getNumberOfModes(), model);

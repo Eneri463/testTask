@@ -21,6 +21,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -46,9 +47,9 @@ public class ComputerController {
     }
 
     @PostMapping("/model/create/computer")
-    @Valid
-    public ResponseEntity<ComputerDTO> createComputer(ComputerRequestDTO request)
+    public ResponseEntity<ComputerDTO> createComputer(@Valid @RequestBody ComputerRequestDTO request)
     {
+
         ComputerCategory category = computerCategoryService.getByName(request.getCategory());
 
         if (category == null)

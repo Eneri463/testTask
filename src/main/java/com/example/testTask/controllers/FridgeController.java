@@ -18,6 +18,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -42,8 +43,7 @@ public class FridgeController {
     }
 
     @PostMapping("/model/create/fridge")
-    @Valid
-    public ResponseEntity<FridgeDTO> createComputer(FridgeRequestDTO request) {
+    public ResponseEntity<FridgeDTO> createComputer(@Valid @RequestBody FridgeRequestDTO request) {
 
         FridgeCompressorType compressorType = fridgeCompressorTypeService.getByName(request.getCompressor());
 
