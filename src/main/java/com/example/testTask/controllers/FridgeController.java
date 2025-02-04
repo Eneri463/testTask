@@ -48,7 +48,7 @@ public class FridgeController {
         FridgeCompressorType compressorType = fridgeCompressorTypeService.getByName(request.getCompressor());
 
         if (compressorType == null)
-            fridgeCompressorTypeService.create(new FridgeCompressorType(null, request.getCompressor()));
+            compressorType = fridgeCompressorTypeService.create(new FridgeCompressorType(null, request.getCompressor()));
 
         Model model = createCurrentModelService.createModel(request);
 

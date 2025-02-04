@@ -6,6 +6,6 @@ import lombok.Data;
 @Data
 public class VacuumCleanerDTO extends ModelDTO{
 
-    private Integer volume;
+    private Double volume;
     private Integer numberOfModes;
 }

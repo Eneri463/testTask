@@ -21,7 +21,7 @@ public class VacuumCleaner {
 
     @NotNull
     @Column(name = "volume")
-    private int volume;
+    private double volume;
 
     @NotNull
     @Column(name = "number_of_modes")

@@ -17,7 +17,7 @@ public class VacuumCleanerSpecification extends ParticularModelSpecification<Vac
         return this.mainFilters(params).and(addFilters(params.getVolume(), params.getNumber_of_modes()));
     }
 
-    public Specification<VacuumCleaner> addFilters(Integer volume, Integer numberOfModes)
+    public Specification<VacuumCleaner> addFilters(Double volume, Integer numberOfModes)
     {
         return (root, query, cb) -> {
 

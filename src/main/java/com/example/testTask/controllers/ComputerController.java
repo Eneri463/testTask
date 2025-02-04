@@ -53,12 +53,12 @@ public class ComputerController {
         ComputerCategory category = computerCategoryService.getByName(request.getCategory());
 
         if (category == null)
-            computerCategoryService.create(new ComputerCategory(null, request.getCategory()));
+            category = computerCategoryService.create(new ComputerCategory(null, request.getCategory()));
 
         ComputerProcessorType processorType = computerProcessorTypeService.getByName(request.getProcessor());
 
         if (processorType == null)
-            computerProcessorTypeService.create(new ComputerProcessorType(null, request.getProcessor()));
+            processorType = computerProcessorTypeService.create(new ComputerProcessorType(null, request.getProcessor()));
 
         Model model = createCurrentModelService.createModel(request);
 
