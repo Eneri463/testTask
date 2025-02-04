@@ -23,8 +23,8 @@ public class VacuumCleanerSpecification extends ParticularModelSpecification<Vac
 
             List<Predicate> list = new ArrayList<Predicate>();
 
-            if (volume != null ) list.add(cb.equal(cb.upper(root.get("memorySize")), volume));
-            if (numberOfModes != null ) list.add(cb.equal(cb.upper(root.get("numberOfCameras")), numberOfModes));
+            if (volume != null ) list.add(cb.equal(root.get("volume"), volume));
+            if (numberOfModes != null ) list.add(cb.equal(root.get("numberOfModes"), numberOfModes));
 
             Predicate[] p = new Predicate[list.size()];
 

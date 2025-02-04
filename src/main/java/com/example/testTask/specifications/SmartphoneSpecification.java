@@ -22,8 +22,8 @@ public class SmartphoneSpecification extends ParticularModelSpecification<Smartp
 
             List<Predicate> list = new ArrayList<Predicate>();
 
-            if (memorySize != null ) list.add(cb.equal(cb.upper(root.get("memorySize")), memorySize));
-            if (numberOfCameras != null ) list.add(cb.equal(cb.upper(root.get("numberOfCameras")), numberOfCameras));
+            if (memorySize != null ) list.add(cb.equal(root.get("memorySize"), memorySize));
+            if (numberOfCameras != null ) list.add(cb.equal(root.get("numberOfCameras"), numberOfCameras));
 
             Predicate[] p = new Predicate[list.size()];
 

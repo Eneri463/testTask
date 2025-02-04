@@ -65,7 +65,7 @@ public class ParticularModelSpecification <T>{
                 list2.add(cb.like(cb.upper(root.get("model").get("appliance").get("producerCompany").get("name")), requiredStr));
 
                 Predicate[] p = new Predicate[list2.size()];
-                cb.or(list2.toArray(p));
+                list.add(cb.or(list2.toArray(p)));
             }
 
             Predicate[] p = new Predicate[list.size()];
