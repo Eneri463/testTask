@@ -17,7 +17,7 @@ import java.util.List;
 @EnableAutoConfiguration
 @AllArgsConstructor
 public class ModelController {
-    ModelServiceInterface modelService;
+    private ModelServiceInterface modelService;
 
     @GetMapping(value= "/models", params = "!type")
     public ResponseEntity<List<Model>> getAllAppliances(

@@ -22,4 +22,10 @@ public class ComputerService implements ComputerServiceInterface {
         return repository.findAll(spec);
     }
 
+    @Override
+    public  Computer create(Computer computer)
+    {
+        return repository.save(computer);
+    }
+
 }

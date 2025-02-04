@@ -21,4 +21,10 @@ public class SmartphoneService implements SmartphoneServiceInterface {
     {
         return repository.findAll(spec);
     }
+
+    @Override
+    public Smartphone create(Smartphone smartphone)
+    {
+        return repository.save(smartphone);
+    }
 }

@@ -17,4 +17,10 @@ public class ComputerProcessorTypeService implements ComputerProcessorTypeServic
     {
         return repository.getByNameIgnoreCase(name);
     }
+
+    @Override
+    public ComputerProcessorType create(ComputerProcessorType processorType)
+    {
+        return repository.save(processorType);
+    }
 }

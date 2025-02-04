@@ -24,10 +24,10 @@ import org.springframework.web.server.ResponseStatusException;
 @AllArgsConstructor
 public class ApplianceController {
 
-    ApplianceServiceInterface applianceService;
-    ApplianceTypeServiceInterface applianceTypeService;
-    ProducerCountryServiceInterface producerCountryService;
-    ProducerCompanyServiceInterface producerCompanyService;
+    private ApplianceServiceInterface applianceService;
+    private ApplianceTypeServiceInterface applianceTypeService;
+    private ProducerCountryServiceInterface producerCountryService;
+    private ProducerCompanyServiceInterface producerCompanyService;
 
     @PostMapping(value= "/appliance/create")
     @Valid

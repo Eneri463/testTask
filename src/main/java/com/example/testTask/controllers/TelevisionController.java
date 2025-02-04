@@ -25,11 +25,11 @@ import java.util.List;
 @AllArgsConstructor
 public class TelevisionController {
 
-    CreateCurrentModelService createCurrentModelService;
-    TelevisionSpecification televisionSpecification;
-    TelevisionServiceInterface televisionService;
-    TelevisionCategoryServiceInterface televisionCategoryService;
-    TelevisionTechnologyServiceInterface televisionTechnologyService;
+    private CreateCurrentModelService createCurrentModelService;
+    private TelevisionSpecification televisionSpecification;
+    private TelevisionServiceInterface televisionService;
+    private TelevisionCategoryServiceInterface televisionCategoryService;
+    private TelevisionTechnologyServiceInterface televisionTechnologyService;
 
     @GetMapping(value= "/models", params = "type=television")
     public ResponseEntity<List<Television>> getTelevisions(

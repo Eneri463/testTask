@@ -21,4 +21,10 @@ public class VacuumCleanerService implements VacuumCleanerServiceInterface {
         return repository.findAll(spec);
     }
 
+    @Override
+    public VacuumCleaner create(VacuumCleaner vacuumCleaner)
+    {
+        return repository.save(vacuumCleaner);
+    }
+
 }

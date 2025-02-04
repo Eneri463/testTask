@@ -8,4 +8,6 @@ import java.util.List;
 public interface ComputerServiceInterface {
 
     public List<Computer> getAllComputers(Specification<Computer> spec);
+
+    public Computer create(Computer computer);
 }

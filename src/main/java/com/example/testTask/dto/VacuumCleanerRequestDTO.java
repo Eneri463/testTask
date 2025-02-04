@@ -4,7 +4,7 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 @Data
-public class VacuumCleanerRequestDTO {
+public class VacuumCleanerRequestDTO extends ModelRequestDTO{
     @NotNull
     private Integer volume;
     @NotNull

@@ -8,4 +8,5 @@ import java.util.List;
 public interface SmartphoneServiceInterface {
 
     public List<Smartphone> getAllSmartphones(Specification<Smartphone> spec);
+    public Smartphone create(Smartphone smartphone);
 }

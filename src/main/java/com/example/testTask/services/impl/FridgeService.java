@@ -21,4 +21,10 @@ public class FridgeService implements FridgeServiceInterface {
         return repository.findAll(spec);
     }
 
+    @Override
+    public Fridge create(Fridge fridge)
+    {
+        return repository.save(fridge);
+    }
+
 }

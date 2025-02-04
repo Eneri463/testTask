@@ -8,4 +8,5 @@ import java.util.List;
 public interface FridgeServiceInterface {
 
     public List<Fridge> getAllFridges(Specification<Fridge> spec);
+    public Fridge create(Fridge fridge);
 }

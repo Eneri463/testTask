@@ -17,4 +17,10 @@ public class FridgeCompressorTypeService implements FridgeCompressorTypeServiceI
     {
         return repository.getByNameIgnoreCase(name);
     }
+
+    @Override
+    public FridgeCompressorType create(FridgeCompressorType compressorType)
+    {
+        return repository.save(compressorType);
+    }
 }

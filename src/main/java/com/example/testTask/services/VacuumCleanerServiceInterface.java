@@ -8,4 +8,6 @@ import java.util.List;
 public interface VacuumCleanerServiceInterface{
 
     public List<VacuumCleaner> getAllVacuumCleaners(Specification<VacuumCleaner> spec);
+
+    public VacuumCleaner create(VacuumCleaner vacuumCleaner);
 }

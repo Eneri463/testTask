@@ -17,4 +17,10 @@ public class ComputerCategoryService implements ComputerCategoryServiceInterface
     {
         return repository.getByNameIgnoreCase(name);
     }
+
+    @Override
+    public ComputerCategory create(ComputerCategory category)
+    {
+        return repository.save(category);
+    }
 }
