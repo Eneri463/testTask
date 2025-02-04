@@ -33,7 +33,7 @@ public class FridgeController {
     private FridgeCompressorTypeServiceInterface fridgeCompressorTypeService;
 
     @GetMapping(value= "/models", params = "type=fridge")
-    public ResponseEntity<List<Fridge>> getFridges(
+    public ResponseEntity<List<FridgeDTO>> getFridges(
             FridgeParams fridgeParams
     )
     {

@@ -16,7 +16,7 @@ public class SizeService implements SizeServiceInterface {
     @Override
     public Size getByNameAndType(String name, ApplianceType type)
     {
-        return repository.getByNameIgnoreCaseAndAppliance(name, type);
+        return repository.getBySizeAndAppliance(name, type);
     }
 
     @Override

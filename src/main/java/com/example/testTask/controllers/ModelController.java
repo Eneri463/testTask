@@ -20,7 +20,7 @@ public class ModelController {
     private ModelServiceInterface modelService;
 
     @GetMapping(value= "/models", params = "!type")
-    public ResponseEntity<List<Model>> getAllAppliances(
+    public ResponseEntity<List<ModelDTO>> getAllAppliances(
             ParamsDTO paramsDTO
     )
     {

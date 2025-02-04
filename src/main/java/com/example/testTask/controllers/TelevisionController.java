@@ -32,7 +32,7 @@ public class TelevisionController {
     private TelevisionTechnologyServiceInterface televisionTechnologyService;
 
     @GetMapping(value= "/models", params = "type=television")
-    public ResponseEntity<List<Television>> getTelevisions(
+    public ResponseEntity<List<TelevisionDTO>> getTelevisions(
             TelevisionParams televisionParams
     )
     {

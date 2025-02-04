@@ -37,7 +37,7 @@ public class ComputerController {
     private ComputerProcessorTypeServiceInterface computerProcessorTypeService;
 
     @GetMapping(value= "/models", params = "type=computer")
-    public ResponseEntity<List<Computer>> getComputers(
+    public ResponseEntity<List<ComputerDTO>> getComputers(
             ComputerParams computerParams
     )
     {

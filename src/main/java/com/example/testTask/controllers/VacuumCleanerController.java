@@ -32,7 +32,7 @@ public class VacuumCleanerController {
 
 
     @GetMapping(value= "/models", params = "type=vacuumCleaner")
-    public ResponseEntity<List<VacuumCleaner>> getVacuumCleaners(
+    public ResponseEntity<List<VacuumCleanerDTO>> getVacuumCleaners(
             VacuumCleanerParams vacuumCleanerParams
     )
     {

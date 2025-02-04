@@ -30,7 +30,7 @@ public class SmartphoneController {
     private SmartphoneServiceInterface smartphoneService;
 
     @GetMapping(value= "/models", params = "type=smartphone")
-    public ResponseEntity<List<Smartphone>> getSmartphones(
+    public ResponseEntity<List<SmartphoneDTO>> getSmartphones(
             SmartphoneParams smartphoneParams
     )
     {

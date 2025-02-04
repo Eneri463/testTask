@@ -6,6 +6,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface SizeRepository extends JpaRepository<Size, Long> {
 
-    Size getByNameIgnoreCaseAndAppliance(String name, ApplianceType appliance);
+    Size getBySizeAndAppliance(String name, ApplianceType appliance);
 
 }

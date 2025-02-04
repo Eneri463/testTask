@@ -12,12 +12,5 @@ import java.util.List;
 
 public interface ApplianceRepository extends JpaRepository<Appliance, Long> {
 
-    // todo
-    @Query("""
-            SELECT o
-            FROM Appliance o
-            WHERE o.type = :type AND o.producerCountry = :country
-            AND o.producerCompany = :company
-            """)
-    Appliance findByIds(@Param("type") ApplianceType type, @Param("company") ProducerCompany company, @Param("country") ProducerCountry country);
+    Appliance getByTypeAndProducerCompanyAndProducerCountry(ApplianceType type, ProducerCompany company, ProducerCountry country);
 }
